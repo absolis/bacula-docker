@@ -3,11 +3,9 @@ FROM ubuntu:14.04
 MAINTAINER Alex Moiseenko <brainsam@yandex.ru>
 
 RUN \
-apt-get update &&\
-apt-get install wget gcc g++ libmariadbd-dev make -y && \
+apt-get update && apt-get install wget gcc g++ libmariadbd-dev make -y && \
 wget http://sourceforge.net/projects/bacula/files/bacula/7.0.5/bacula-7.0.5.tar.gz && \
-tar -zxvf bacula-7.0.5.tar.gz --directory /root/ && \
-rm bacula-7.0.5.tar.gz &&\
+tar -zxvf bacula-7.0.5.tar.gz --directory /root/ && rm bacula-7.0.5.tar.gz &&\
 cd /root/bacula-7.0.5 && \
 
 ./configure \
@@ -22,23 +20,19 @@ cd /root/bacula-7.0.5 && \
         --with-job-email=your@address.com \
         --with-smtp-host=localhost && \
 
-make && \
-make install && \
+make && make install && \
 
 apt-get remove wget gcc g++ libmariadbd-dev make -y && \
 apt-get clean all
 
-ENTRYPOINT \
+COPY bootstrap.sh /root
 
-/opt/bacula/bin/bacula
+ENTRYPOINT /opt/bacula/bin/bacula
 
-CMD \
+CMD start
 
-start
-
-VOLUME \
-
-/opt/bacula/etc
+VOLUME /opt/bacula/etc
+VOLUME /data
 
 ENV \
   DB_ADDRESS=127.0.0.1 \
