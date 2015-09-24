@@ -32,10 +32,10 @@ docker run \
     --env="DB_ADDRESS=127.0.0.1" \
     --env="DB_USER=username" \
     --env="DB_PASS=my_password" \
-    --env="SMTP_HOST=localhost"
-    --env="ADMIN_EMAIL=your@address.com"
-    --volume=/path/to/config/folder:/opt/bacula/etc/
-    --volume=/path/to/data/folder:/opt/bacula/data/
+    --env="SMTP_HOST=localhost" \
+    --env="ADMIN_EMAIL=your@address.com" \
+    --volume=/path/to/config/folder:/opt/bacula/etc/ \
+    --volume=/path/to/data/folder:/opt/bacula/data/ \
     brainsam/bacula-server
 
 ``` 

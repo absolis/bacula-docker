@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Skip if bacula has already installed 
-if [-f /opt/bacula/bacula]; then
+if [ -f /opt/bacula/bacula ]; then
   exit
 fi
+
+echo "I'm here"
 
 # Install several programms for Bacula deploy
 sudo apt-get update
