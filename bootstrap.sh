@@ -15,9 +15,9 @@ sudo apt-get -y install wget gcc g++ libmariadbd-dev make
 mkdir /opt/bacula
 
 # Downloading and untar bacula package
-wget http://sourceforge.net/projects/bacula/files/bacula/7.0.5/bacula-7.0.5.tar.gz
-tar -zxvf bacula-7.0.5.tar.gz --directory /root/ && rm bacula-7.0.5.tar.gz &&\
-cd /root/bacula-7.0.5 && \
+git clone http://git.bacula.org/bacula bacula \
+
+cd bacula && \
 
 # Compiling from sources
 ./configure \
@@ -29,8 +29,6 @@ cd /root/bacula-7.0.5 && \
         --with-pid-dir=/opt/bacula/working \
         --with-subsys-dir=/opt/bacula/working \
         --with-working-dir=/opt/bacula/working \
-        --with-job-email="$ADMIN_EMAIL" \
-        --with-smtp-host="$SMTP_HOST" && \
 make && make install && \
 
 # Clean system from useless files
