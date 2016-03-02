@@ -4,7 +4,7 @@
 
 ## Prerequicites
 
-For use this docker image you need:
+To use bacula-docker container image you need:
 
 * Mysql Server
 * Config folder
@@ -34,8 +34,8 @@ docker run \
     --env="DB_PASS=my_password" \
     --env="SMTP_HOST=localhost" \
     --env="ADMIN_EMAIL=your@address.com" \
-    --volume=/path/to/config/folder:/opt/bacula/etc/ \
-    --volume=/path/to/data/folder:/opt/bacula/data/ \
+    --volume=/path/to/config/directory:/opt/bacula/etc/ \
+    --volume=/path/to/data/directory:/opt/bacula/data/ \
     brainsam/bacula-server
 
 ``` 
