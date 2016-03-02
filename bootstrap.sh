@@ -9,12 +9,12 @@ echo "I'm here"
 
 # Install several programms for Bacula deploy
 sudo apt-get update
-sudo apt-get -y install wget gcc g++ libmariadbd-dev make
+sudo apt-get -y install wget gcc g++ libmariadbd-dev make git
 
 # /opt/bacula - will be a program directory
 mkdir /opt/bacula
 
-# Downloading and untar bacula package
+# Downloading bacula scratch
 git clone http://git.bacula.org/bacula bacula \
 
 cd bacula && \
@@ -31,8 +31,13 @@ cd bacula && \
         --with-working-dir=/opt/bacula/working \
 make && make install && \
 
+# Add custom user config catalog
+mkdir /opt/bacula/etc/conf.d
+echo "@|\"sh -c 'for f in /opt/bacula/etc/*.conf ; do echo @${f} ; done'\"" >> /opt/bacula/etc/bacula-dir.conf
+
 # Clean system from useless files
 apt-get remove wget gcc g++ libmariadbd-dev make -y && \
 apt-get clean all
+
 
  
