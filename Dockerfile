@@ -31,7 +31,7 @@ RUN bacula/bacula/configure \
         --sysconfdir=/opt/bacula/etc \
         --with-pid-dir=/opt/bacula/working \
         --with-subsys-dir=/opt/bacula/working \
-        --with-working-dir=/opt/bacula/working \
+        --with-working-dir=/opt/bacula/working
 		
 RUN make && make install
 
