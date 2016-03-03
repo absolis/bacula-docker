@@ -9,21 +9,20 @@ ENV SMTP_HOST=localhost
 ENV ADMIN_EMAIL=your@address.com
 ENV PATH /opt/bacula/bin:$PATH
 
-RUN apt-get update &&
+RUN apt-get update && \
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
-wget\
-gcc\
-g++\
+wget \
+gcc \
+g++ \
 libmysqlclient-dev \
-make\
-file\
+make \
+file \
 git
 
+RUN mkdir /opt/bacula
 RUN git clone http://git.bacula.org/bacula bacula 
 
 RUN cd bacula/bacula
-RUN mkdir /opt/bacula
-
 RUN ./configure \
         --enable-smartalloc \
         --enable-batch-insert \
@@ -42,12 +41,6 @@ RUN make && make install
 RUN mkdir /opt/bacula/etc/conf.d
 RUN echo "@|\"sh -c 'for f in /opt/bacula/etc/conf.d/*.conf ; do echo @${f} ; done'\"" >> /opt/bacula/etc/bacula-dir.conf
 
-RUN sed -i "s/^.*dbname.*$/dbname = ${DB_NAME:-bacula}\n
-user = ${DB_USER:-bacula}\n
-password = \"${DB_PASS:-bacula}\n\"
-DB Address = ${DB_HOST:-localhost}\n
-DB Port = ${DB_PORT:-null}/" /opt/bacula/etc/bacula-dir.conf
-
 # Clean system from useless files
 RUN apt-get remove wget gcc g++ libmysqlclient-dev make file git -y
 RUN apt-get clean all
@@ -55,6 +48,7 @@ RUN apt-get clean all
 VOLUME /opt/bacula/etc/conf.d
 VOLUME /opt/bacula/data
 
-CMD bacula start
+COPY entrypoint.sh /opt/bacula/
+ENTRYPOINT /opt/bacula/entrypoint.sh
 
 EXPOSE 9101 9102 9103
