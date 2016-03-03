@@ -2,8 +2,6 @@ FROM debian:latest
 
 MAINTAINER Alex Moiseenko <brainsam@yandex.ru>
 
-COPY bootstrap.sh /root/
-
 ENV DB_HOST=127.0.0.1
 ENV DB_USER=admin
 ENV DB_PASS=password
@@ -14,6 +12,7 @@ ENV PATH /opt/bacula/bin:$PATH
 RUN apt-get update && apt-get install -y wget gcc g++ libmariadbd-dev make git
 RUN git clone http://git.bacula.org/bacula bacula 
 
+RUN cd bacula/bacula
 RUN mkdir /opt/bacula
 
 RUN ./configure \
@@ -26,7 +25,9 @@ RUN ./configure \
         --with-pid-dir=/opt/bacula/working \
         --with-subsys-dir=/opt/bacula/working \
         --with-working-dir=/opt/bacula/working \
-RUN make && make install &&
+		--with-systemd 
+		
+RUN make && make install
 
 # Add custom user config catalog
 RUN mkdir /opt/bacula/etc/conf.d
