@@ -11,4 +11,7 @@ grep -q 'DB Address' bacula-dir.conf &&  sed -i 's/\(DB\sAddress\s*=\s*\).*/\1$D
 grep -q 'DB Port' bacula-dir.conf &&  sed -i 's/\(DB\sPort\s*=\s*\).*/\1$DB_PORT/' bacula-dir.conf || \
 	sed -i 's/\(^.*DB\sAddress.*$\)/\1\nDB Port = $DB_PORT/' bacula-dir.conf
 
+
+# add mysql creation of db if not exists
+
 bacula start
