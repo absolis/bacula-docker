@@ -44,11 +44,14 @@ RUN echo "@|\"sh -c 'for f in /opt/bacula/etc/conf.d/*.conf ; do echo @${f} ; do
 # Clean system from useless files
 RUN apt-get remove wget gcc g++ libmysqlclient-dev make file git -y
 RUN apt-get clean all
+RUN rm -rf bacula
 
 VOLUME /opt/bacula/etc/conf.d
 VOLUME /opt/bacula/data
 
 COPY entrypoint.sh /opt/bacula/
+RUN chmod 755 /opt/bacula/entrypoint.sh
+
 ENTRYPOINT /opt/bacula/entrypoint.sh
 
 EXPOSE 9101 9102 9103
