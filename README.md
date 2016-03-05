@@ -12,8 +12,10 @@ To use bacula-docker container image you need:
 
 All of these components links by environment variables in the *docker run* command:
 
+DB_TYPE - mysql (DEFAULT), postgresql or sqlite
 DB_HOST - address of mysql server
 DB_USER - username of account on mysql server, that have admin privileges on database "bacula"
+DB_PORT - default null
 DB_PASS - password for DB_USER accout
 SMTP_HOST - address of smtp server
 ADMIN_EMAIL - email address to send reports from bacula server
@@ -29,6 +31,7 @@ docker run \
     -p 9101:9101 \
     -p 9102:9102 \
     -p 9103:9103 \
+	--env="DB_TYPE=mysql" \
     --env="DB_HOST=127.0.0.1" \
     --env="DB_USER=username" \
     --env="DB_PASS=my_password" \
