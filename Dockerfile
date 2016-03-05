@@ -2,13 +2,10 @@ FROM debian:latest
 
 MAINTAINER Alex Moiseenko <brainsam@yandex.ru>
 
-ENV DB_HOST
 ENV DB_TYPE=mysql
-ENV DB_PORT
 ENV DB_NAME=bacula
 ENV DB_USER=bacula
 ENV DB_PASS=password
-ENV SMTP_HOST
 ENV ADMIN_EMAIL=your@address.com
 ENV PATH /opt/bacula/etc:$PATH
 
