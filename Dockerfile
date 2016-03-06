@@ -9,7 +9,7 @@ ENV DB_PASS=password
 ENV ADMIN_EMAIL=your@address.com
 ENV PATH /opt/bacula/etc:$PATH
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget gcc g++ make file git libmysqlclient-dev sqlite3 bacula-common-pgsql
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget gcc g++ make file git libmysqlclient-dev sqlite3 bacula-common-pgsql libpq-dev
 
 RUN mkdir /opt/bacula
 RUN git clone http://git.bacula.org/bacula bacula 
@@ -35,7 +35,7 @@ RUN mkdir /opt/bacula/etc/conf.d /opt/bacula/data
 RUN echo "@|\"sh -c 'for f in /opt/bacula/etc/conf.d/*.conf ; do echo @${f} ; done'\"" >> /opt/bacula/etc/bacula-dir.conf
 
 # Clean system from useless files
-RUN apt-get remove wget gcc g++ make file git libmysqlclient-dev sqlite3 bacula-common-pgsql -y
+RUN apt-get remove wget gcc g++ make file git libmysqlclient-dev sqlite3 bacula-common-pgsql libpq-dev -y
 RUN apt-get clean all
 RUN rm -rf bacula
 
