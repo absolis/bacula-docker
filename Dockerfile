@@ -9,7 +9,7 @@ ENV DB_PASS=password
 ENV ADMIN_EMAIL=your@address.com
 ENV PATH /opt/bacula/etc:$PATH
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget gcc g++ make file git libmysqlclient-dev sqlite3 bacula-common-pgsql libpq-dev
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget gcc g++ make file git libmysqlclient-dev mysql-client sqlite3 bacula-common-pgsql libpq-dev
 
 RUN mkdir /opt/bacula
 RUN git clone http://git.bacula.org/bacula bacula 
@@ -45,6 +45,6 @@ VOLUME /opt/bacula/data
 COPY entrypoint.sh /opt/bacula/
 RUN chmod 755 /opt/bacula/entrypoint.sh
 
-ENTRYPOINT ["/opt/bacula/entrypoint.sh"]
+# ENTRYPOINT ["/opt/bacula/entrypoint.sh"]
 
 EXPOSE 9101 9102 9103
