@@ -2,6 +2,7 @@ FROM debian:latest
 
 MAINTAINER Alex Moiseenko <brainsam@yandex.ru>
 
+ENV DIR_NAME=bacula-dir
 ENV DB_TYPE=mysql
 ENV DB_NAME=bacula
 ENV DB_USER=bacula
