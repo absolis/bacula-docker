@@ -45,6 +45,6 @@ VOLUME /opt/bacula/data
 COPY entrypoint.sh /opt/bacula/
 RUN chmod 755 /opt/bacula/entrypoint.sh
 
-# ENTRYPOINT ["/opt/bacula/entrypoint.sh"]
+ENTRYPOINT ["/opt/bacula/entrypoint.sh"]
 
 EXPOSE 9101 9102 9103
