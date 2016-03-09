@@ -29,7 +29,7 @@ grep -q 'DB Port' /opt/bacula/etc/bacula-dir.conf &&  sed -i "s/\(DB\sPort\s*=\s
 export db_name=$DB_NAME
 case ${DB_TYPE} in
 	mysql)
-		echo "/opt/bacula/etc/create_bacula_database mysql -u $DB_USER ${DB_PASS:+-p$DB_PASS} ${DB_HOST:+-h $DB_HOST} ${DB_PORT:+-P $DB_PORT}"
+		/opt/bacula/etc/create_bacula_database mysql -u $DB_USER ${DB_PASS:+-p$DB_PASS} ${DB_HOST:+-h $DB_HOST} ${DB_PORT:+-P $DB_PORT}
 		/opt/bacula/etc/make_bacula_tables mysql -u $DB_USER ${DB_PASS:+-p$DB_PASS} ${DB_HOST:+-h $DB_HOST} ${DB_PORT:+-P $DB_PORT}
 		;;
 	postgresql)
@@ -59,4 +59,4 @@ Messages="$Messages }\n"
 
 sed -i 's/Messages\s*{\s*Name = Standard.*!skipped$^}/$Messages/' /opt/bacula/etc/bacula-dir.conf
 
-bacula start
+bacula start -d

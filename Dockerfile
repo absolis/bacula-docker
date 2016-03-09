@@ -33,7 +33,7 @@ make && make install
 
 # Add custom user config catalog
 RUN mkdir /opt/bacula/etc/conf.d /opt/bacula/data
-RUN echo "@|\"sh -c 'for f in /opt/bacula/etc/conf.d/*.conf ; do echo @${f} ; done'\"" >> /opt/bacula/etc/bacula-dir.conf
+RUN echo "@|\"sh -c 'for f in /opt/bacula/etc/conf.d/*.conf ; do echo @\$\{f\} ; done'\"" >> /opt/bacula/etc/bacula-dir.conf
 
 # Clean system from useless files
 RUN apt-get remove wget gcc g++ make file git libmysqlclient-dev sqlite3 bacula-common-pgsql libpq-dev -y
