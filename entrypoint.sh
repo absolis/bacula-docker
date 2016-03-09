@@ -17,7 +17,7 @@ fi
 
 sed -i "s/\(Director\s*{\s*\n\s*Name\s=\s\).*$/\1$DIR_NAME/" /opt/bacula/etc/bacula-dir.conf
 
-sed -i "s/\(^\s*dbname\s*=\s*\).*\s*\(user\s*=\s*\).*\s*\(password\s*=\s*\).*$/\1$DB_NAME \2$DB_USER \3$DB_PASS/" /opt/bacula/etc/bacula-dir.conf
+sed -i "s/\(^\s*dbname\s*=\s*\).*\s*\(user\s*=\s*\).*\s*\(password\s*=\s*\).*$/\1$DB_NAME\ \2$DB_USER\ \3$DB_PASS/" /opt/bacula/etc/bacula-dir.conf
 
 grep -q 'DB Address' /opt/bacula/etc/bacula-dir.conf &&  sed -i "s/\(DB\sAddress\s*=\s*\).*/\1$DB_HOST/" /opt/bacula/etc/bacula-dir.conf || sed -i "s/\(^.*dbname.*$\)/\1\n  DB Address = $DB_HOST/" /opt/bacula/etc/bacula-dir.conf
 
