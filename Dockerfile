@@ -43,4 +43,6 @@ RUN chmod 755 /opt/bacula/entrypoint.sh
 
 ENTRYPOINT ["/opt/bacula/entrypoint.sh"]
 
+CMD ["bacula-dir"]
+
 EXPOSE 9101 9102 9103
